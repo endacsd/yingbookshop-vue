@@ -4,8 +4,8 @@
         <h2>欢迎{{username}}</h2>
         <h3>你的余额为{{getPrice(surplus)}}￥</h3>
         <el-carousel :interval="4000" type="card" height="400px" >
-            <el-carousel-item v-for="item in 6" :key="item" class="item-view">
-                <el-image src="https://img9.doubanio.com/view/subject/s/public/s27195536.jpg" class="image">
+            <el-carousel-item v-for="item in bookList" :key="item" class="item-view">
+                <el-image :src="item.cover" class="image">
                     <div slot="error" class="image-slot">
                         <i class="el-icon-picture-outline" style="width: auto;height: 227px"></i>
                     </div>
@@ -21,6 +21,7 @@
 
 <script>
 import {getUserInfo} from "@/api/user";
+import {getBookShow} from "@/api/book";
 
 export default {
     name: "HomeIndex",
@@ -28,18 +29,18 @@ export default {
       return{
           username : '',
           avatar : '',
-          surplus : 0
+          surplus : 0,
+          bookList : []
 
       }
     },
     created(){
         this.loadUserInfo()
+        this.getBookShow()
     },
     methods:{
         loadUserInfo() {
-
             getUserInfo().then(res => {
-
                 const {code,username, avatar,surplus} = res.data
                 if(code==200){
                     this.username = username
@@ -51,7 +52,6 @@ export default {
                         type: 'error'
                     });
                 }
-
             }).catch(err => {
                 //服务器错误
                 console.log(err);
@@ -68,6 +68,18 @@ export default {
             if(len===1) return '0.0' + str;
             return str.substring(0,len-2)+'.'+str.substring(len-2,len)
         },
+        getBookShow(){
+            getBookShow().then(res=>{
+
+                console.log(res.data.bookList)
+                this.bookList=res.data.bookList
+            }).catch(
+                err=>{
+                    console.log(err)
+                }
+
+            )
+        }
     }
 }
 </script>

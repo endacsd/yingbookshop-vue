@@ -6,21 +6,21 @@ import request from "@/utils/request";
 export const login = user    => {
     return request({
         method: 'POST',
-        url: '/login',
+        url: '/api/login',
         data: user
     })
 }
 export const register = user =>{
     return request({
         method : 'POST',
-        url : '/register',
+        url : '/api/register',
         data : user
     })
 }
 export const logout = () => {
     return request({
         method : 'GET',
-        url : '/logout'
+        url : '/api/logout'
     })
 }
 
@@ -31,9 +31,17 @@ export const getUserInfo = () => {
     })
 }
 
-export const updateUserInfo = () =>{
 
+export const setAvatar = (url)=>{
+    return request({
+        method: 'POST',
+        url: '/api/v1/user/setAvatar',
+        data : {
+            url:url
+        }
+    })
 }
+
 
 
 

@@ -51,9 +51,9 @@ export default {
         return{
             isRegistering : false,
             user : {
-                username : '21180430',
-                mail : 'zhengyh2118@jlu.edu.cn',
-                password : '123456'
+                username : '',
+                mail : '',
+                password : ''
             },
             formRules:{
                 username :[

@@ -17,6 +17,14 @@ export const getBookInfo = (bookId) =>{
     })
 }
 
+
+export const getBookShow = () =>{
+    return request({
+        method: 'get',
+        url: '/api/public/getBookShow/'
+    })
+}
+
 export const buyBook = (bookList) => {
     return request({
         method: 'post',

@@ -1,5 +1,8 @@
 <template>
     <div class="login-container">
+
+
+
         <el-form ref="login-form"
                  :model="user"
                  :rules="formRules"
@@ -78,7 +81,7 @@ export default {
                 const {data} = res
                 console.log(data)
                 //登录成功
-                if (data.code == 200) {
+                if (data.code === 200) {
                     this.$message({
                         message: '登录成功',
                         type: 'success'

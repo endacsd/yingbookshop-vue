@@ -19,8 +19,10 @@
 
             </div>
             <el-dropdown-menu slot="dropdown" >
+                <el-dropdown-item command="home">主页</el-dropdown-item>
                 <el-dropdown-item command="settings">设置</el-dropdown-item>
                 <el-dropdown-item command="logout">退出</el-dropdown-item>
+                <el-dropdown-item command="admin" v-if="authority==='ROLE_ADMIN'">管理</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
         <el-dropdown @command="handleCommand" v-else>
@@ -40,13 +42,15 @@
 
 <script>
 import {getUserInfo,logout} from '@/api/user'
+import {serviceUrl} from "@/utils/config";
 export default {
     name: "AppHeader",
     data() {
         return {
             username: '',
             avatar : '',
-            isOnline : false
+            isOnline : false,
+            authority: 'ROLE_NULL'
         }
     },
     created(){
@@ -63,11 +67,12 @@ export default {
 
             getUserInfo().then(res => {
 
-                const {code,username, avatar} = res.data
+                const {code,username, avatar,authority} = res.data
                 if(code==200){
                     this.username = username
-                    this.avatar = avatar
+                    this.avatar = serviceUrl+''+avatar
                     this.isOnline = true
+                    this.authority=authority
                 }else{
                     this.isOnline = false
                 }
@@ -103,11 +108,24 @@ export default {
             if( this.$route.path !=='/settings')
             this.$router.push({path:'/settings'})
         },
+        admin(){
+            if( this.$route.path !=='/admin')
+            this.$router.push({path:'/admin'})
+        },
+        home(){
+             if( this.$route.path !=='/')
+             this.$router.push({path:'/'})
+        },
         handleCommand(command) {
-            if(command=="settings"){
+
+            if(command==="settings"){
                 this.settings()
-            }else if(command =="logout"){
+            }else if(command ==="logout"){
                 this.logout()
+            }else if(command === "admin"){
+                this.admin()
+            }else if(command === "home"){
+                this.home()
             }
         }
     }

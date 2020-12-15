@@ -10,6 +10,19 @@ import BookDetail from '@/view/book/index'
 import Settings from '@/view/settings/index'
 import Order from '@/view/order/index'
 import Register from '@/view/register/index'
+
+import AdminHome from '@/view/admin/home/index'
+import AdminLayout from '@/view/admin/layout/index'
+import AdminBook from '@/view/admin/book/index'
+import AdminUser from '@/view/admin/user/index'
+import AdminOrder from '@/view/admin/order/index'
+
+Vue.use(AdminBook)
+Vue.use(AdminHome)
+Vue.use(AdminLayout)
+Vue.use(AdminOrder)
+Vue.use(AdminUser)
+
 Vue.use(Layout)
 Vue.use(Home)
 Vue.use(Shop)
@@ -31,6 +44,32 @@ const routes = [
       path : '/register',
       name : 'register',
       component: Register
+    },
+    {
+      path: '/admin/',
+      component: AdminLayout,
+      children: [
+          {
+              path: '',
+              name: 'AdminHome',
+              component : AdminHome
+          },
+          {
+              path: '/admin/book',
+              name: 'AdminBook',
+              component: AdminBook
+          },
+          {
+              path: '/admin/user',
+              name: 'AdminUser',
+              component: AdminUser
+          },
+          {
+              path: '/admin/order',
+              name: 'AdminOrder',
+              component: AdminOrder
+          }
+      ]
     },
     {
         path: '/',

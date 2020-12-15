@@ -182,13 +182,7 @@ export default {
     data(){
         return{
             bookId: this.$route.query.bookId,
-            book:{
-                bookId : 1,
-                name : 'Haskell趣学指南',
-                cover: 'https://img9.doubanio.com/view/subject/s/public/s27195536.jpg',
-                QTY : 100,
-                price : 3000
-            },
+            book:{},
             num : 0,
             value: 3.7
         }

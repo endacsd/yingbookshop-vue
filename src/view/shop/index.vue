@@ -39,7 +39,7 @@
             </el-col>
         </el-row>
         <el-pagination
-                @size-change="sizeChange"
+
                 @current-change="curPageChange"
                 class="page"
                 :page-size="pageSize"
@@ -68,9 +68,7 @@ export default {
         this.getBookListByPage(1)
     },
     methods:{
-        sizeChange(){
-            console.log("sizeChange")
-        },
+
         curPageChange(currentPage){
             //console.log("curPageChange"+currentPage)
             this.getBookListByPage(currentPage)
